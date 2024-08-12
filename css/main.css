@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  height: 100vh;
+  background-color: black;
+}
+
+.content__position {
+  display: flex;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.content__section {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: 1%;
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+  padding: 2rem;
+  gap: 1rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.tattoo__form {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: black;
+  gap: 5px;
+}
+.tattoo__form .button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tattoo__form .button:hover {
+  background-color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .content__section {
+    padding: 1rem;
+  }
+  .tattoo__form {
+    padding: 10px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

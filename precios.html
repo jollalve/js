@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="preconnect" href="https:/fonts.googleapis.com">
+    <link rel="preconnect" href="https:/fonts.gstatic.com" crossorigin>
+    <link href="https:/fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <title>JP TATTOO</title>
+
+</head>
+
+<body>
+    <div class="content__position">
+        <main class="content__section">
+            <h1 class="content__title">CALCULA EL COSTO DE TU TATUAJE</h1>
+            <form class="tattoo__form" id="tattooForm">
+                <!-- categoria -->
+                <label for="categoria">Categoría:</label>
+                <select id="categoria"></select><br><br>
+
+                <!-- tamano -->
+                <label for="tamano">Tamaño:</label>
+                <select id="tamano"></select><br><br>
+
+                <!-- color -->
+                <label for="color">Color:</label>
+                <select id="color"></select><br><br>
+
+                <!-- lugar -->
+                <label for="lugar">Lugar:</label>
+                <select id="lugar"></select><br><br>
+
+                <button class="button" type="button" onclick="calculateCost()">Calcular Costo</button>
+            </form>
+        <h2>TOTAL: <span id="totalCost">0</span></h2>
+        <h2>CON DESCUENTO 15%: <span id="discountedCost">0</span></h2>
+        </main>
+    </div>
+    <script src="/js/scripts.js"></script>
+</body>
+</html>
