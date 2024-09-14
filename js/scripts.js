@@ -1,4 +1,3 @@
-// var categoria/estilo
 let blackworkCost = 40000;
 let minimalistaCost = 40000;
 let acuarelasCost = 50000;
@@ -6,18 +5,15 @@ let tradicionalCost = 40000;
 let geometricoCost = 40000;
 let nombreSencilloCost = 30000;
 
-// var tamano
 let smallSizeCost = 0;
 let mediumSizeCost = 25000;
 let largeSizeCost = 40000;
 
-// var color
 let oneColorCost = 0;
 let twoColorsCost = 10000;
 let threeColorsCost = 15000;
 let fourColorsCost = 20000;
 
-// var ubicacion
 let brazoCost = 0;
 let manoCost = 10000;
 let dedosCost = 15000;
@@ -28,7 +24,6 @@ let espaldaCost = 0;
 let pechoCost = 5000;
 let costillaCost = 5000;
 
-// arrays
 const categories = [
     { name: "Blackwork", cost: blackworkCost },
     { name: "Minimalista", cost: minimalistaCost },
@@ -63,7 +58,6 @@ const locations = [
     { name: "Costilla", cost: costillaCost }
 ];
 
-// objeto
 function ConfiguracionTatuaje(categoria, tamano, color, ubicacion) {
     this.categoria = categoria;
     this.tamano = tamano;
@@ -78,12 +72,30 @@ ConfiguracionTatuaje.prototype.calcularCostoTotal = function() {
 ConfiguracionTatuaje.prototype.verificarRestricciones = function() {
     if (this.categoria.name === "Acuarelas" && this.tamano.name === "8 - 16 cm" && 
         this.color.name === "1 Color" && this.ubicacion.name === "Dedos") {
-        alert('No es posible realizar un tatuaje de acuarelas de ese tamaño en los dedos y en un solo color. Intente otra combinación.'); // alert
-        console.log('Un tatuaje de acuarelas debe llevar mas de UN color, tambien requiere mas espacio del que pueda estar disponible en un dedo.') // console log
+        const mensajeEdad = document.getElementById('mensajeEdad');
+        mensajeEdad.textContent = 'No se puede realizar un tatuaje de acuarelas de ese tamaño en los dedos con un solo color.';
+        mensajeEdad.style.color = 'red';
         return false;
     }
     return true;
 };
+
+function guardarFechaNacimiento(fechaNacimiento) {
+    localStorage.setItem('fechaNacimiento', fechaNacimiento);
+}
+
+function obtenerFechaNacimiento() {
+    return localStorage.getItem('fechaNacimiento');
+}
+
+function cargarFechaNacimiento() {
+    const fechaGuardada = obtenerFechaNacimiento();
+    
+    if (fechaGuardada) {
+        document.getElementById('fechaNacimiento').value = fechaGuardada;
+        verificarMayorDeEdad(); 
+    }
+}
 
 function calcularEdad(fechaNacimiento) {
     const hoy = new Date();
@@ -94,33 +106,46 @@ function calcularEdad(fechaNacimiento) {
     if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
         edad--;
     }
-    console.log(`Tu edad es: ${edad} annos`); // console log
+
     return edad;
 }
 
 function verificarMayorDeEdad() {
-    const fechaNacimiento = prompt("Ingrese su fecha de nacimiento en formato YYYY-MM-DD (por ejemplo, 2000-01-15):");
+    const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+    const mensajeEdad = document.getElementById('mensajeEdad');
+    const tattooForm = document.getElementById('tattooForm');
+    const totalSection = document.getElementById('totalSection');
 
-    while (fechaNacimiento === null || fechaNacimiento.trim() === "" || isNaN(Date.parse(fechaNacimiento))) {
-        alert("Debe ingresar una fecha de nacimiento válida para usar este simulador."); // alert
-        fechaNacimiento = prompt("Ingrese su fecha de nacimiento en formato YYYY-MM-DD (por ejemplo, 2000-01-15):"); // prompt
-
-        if (fechaNacimiento === null) {
-            alert("Debe ser mayor de 18 años para usar este simulador de costos."); // alert
-            return false;
-        }
+    if (!fechaNacimiento) {
+        mensajeEdad.textContent = 'Debe ingresar una fecha de nacimiento válida.';
+        mensajeEdad.style.color = 'red';
+        tattooForm.style.display = 'none';
+        totalSection.style.display = 'none';
+        return false;
     }
 
     const edad = calcularEdad(fechaNacimiento);
 
     if (edad >= 18) {
+        mensajeEdad.textContent = `Tienes ${edad} años. Adelante.`;
+        mensajeEdad.style.color = 'green';
+        tattooForm.style.display = 'block';
+        totalSection.style.display = 'block';
+        guardarFechaNacimiento(fechaNacimiento);
         return true;
     } else {
-        alert("Debe ser mayor de 18 años para usar este simulador de costos."); // alert
-        console.log('Intenta nuevamente cuando seas mayor de edad. Saludos.') // console log
+        mensajeEdad.textContent = '* Debe ser mayor de 18 años para hacerte un tatuaje.';
+        mensajeEdad.style.color = 'red';
+        tattooForm.style.display = 'none';
+        totalSection.style.display = 'none';
         return false;
     }
 }
+
+document.getElementById('formEdad').addEventListener('submit', function(event) {
+    event.preventDefault();
+    verificarMayorDeEdad();
+});
 
 function populateOptions(selectElementId, options) {
     const selectElement = document.getElementById(selectElementId);
@@ -134,43 +159,10 @@ function populateOptions(selectElementId, options) {
     }
 }
 
-// busqueda y filtrado sobre arrays
-function seleccionarOpcionMasBarata() {
-    let costoMinimo = Infinity;
-    let mejorConfiguracion = null;
-
-    for (const categoria of categories) {
-        for (const tamano of sizes) {
-            for (const color of colors) {
-                for (const ubicacion of locations) {
-                    const configuracion = new ConfiguracionTatuaje(categoria, tamano, color, ubicacion);
-                        const costoTotal = configuracion.calcularCostoTotal();
-                        if (costoTotal < costoMinimo) {
-                            costoMinimo = costoTotal;
-                            mejorConfiguracion = configuracion;
-                    }
-                }
-            }
-        }
-    }
-
-    if (mejorConfiguracion) {
-        alert(
-            `La opción más barata es:\n` +
-            `Categoría: ${mejorConfiguracion.categoria.name}\n` +
-            `Tamaño: ${mejorConfiguracion.tamano.name}\n` +
-            `Color: ${mejorConfiguracion.color.name}\n` +
-            `Ubicación: ${mejorConfiguracion.ubicacion.name}\n` +
-            `Costo total: $${costoMinimo}`
-        ); // alert
-        document.getElementById('categoria').value = mejorConfiguracion.categoria.cost;
-        document.getElementById('tamano').value = mejorConfiguracion.tamano.cost;
-        document.getElementById('color').value = mejorConfiguracion.color.cost;
-        document.getElementById('lugar').value = mejorConfiguracion.ubicacion.cost;
-    } 
-}
-
-
+populateOptions('categoria', categories);
+populateOptions('tamano', sizes);
+populateOptions('color', colors);
+populateOptions('lugar', locations);
 
 function calculateCost() {
     const categoryCost = parseInt(document.getElementById('categoria').value, 10);
@@ -195,29 +187,15 @@ function calculateCost() {
     document.getElementById('totalCost').textContent = `$${totalCost}`;
     if (selectedSize.cost === smallSizeCost) {
         document.getElementById('discountedCost').textContent = "DESCUENTO SOLO VÁLIDO PARA TATUAJES MAYORES A 8 CM";
+        document.getElementById('discountedCost').style.color = 'red';
     } else {
         document.getElementById('discountedCost').textContent = `$${discountedCost}`;
-        console.log('No ha sido posible aplicar el descuento con las opciones seleccionadas. Lo sentimos.')} // console log
-    }
-
-function iniciarSimulador() {
-    if (verificarMayorDeEdad()) {
-        populateOptions('categoria', categories);
-        populateOptions('tamano', sizes);
-        populateOptions('color', colors);
-        populateOptions('lugar', locations);
-
-        const btnOpcionBarata = document.getElementById('btnOpcionBarata');
-        btnOpcionBarata.onclick = function(event) {
-            event.preventDefault(); // Previene el comportamiento predeterminado (aunque no debería ser necesario con type="button")
-            seleccionarOpcionMasBarata();
-        };
     }
 }
 
-document.addEventListener('DOMContentLoaded', iniciarSimulador); () => {
-    populateOptions('categoria', categories);
-    populateOptions('tamano', sizes);
-    populateOptions('color', colors);
-    populateOptions('lugar', locations);
+window.onload = function() {
+    const tattooForm = document.getElementById('tattooForm');
+    tattooForm.style.display = 'none';
+    document.getElementById('totalSection').style.display = 'none';
+    cargarFechaNacimiento();
 };

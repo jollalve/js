@@ -16,41 +16,88 @@ body {
 .content__position {
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 80vh;
 }
 
 .content__section {
-  display: grid;
-  grid-template-columns: 1fr;
-  border-radius: 1%;
+  padding: 2rem;
   max-width: 550px;
   width: 100%;
-  margin: auto;
-  padding: 2rem;
-  gap: 1rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   background: white;
 }
 
+.content__title {
+  text-align: center;
+}
+
+.form__edad {
+  display: grid;
+  grid-auto-columns: minmax(100%, 1fr);
+  justify-content: center;
+  gap: 1rem;
+}
+
 .tattoo__form {
-  padding: 20px;
-  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: minmax(100%, 1fr);
   background-color: #f0f0f0;
   color: black;
-  gap: 5px;
+
 }
+
+.tattoo__options {
+  display: grid;
+  grid-template-columns: minmax(100%, 1fr);
+}
+
 .tattoo__form .button {
-  margin: 0.3rem;
+  padding: 10px 20px;
   background-color: black;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .tattoo__form .button:hover {
   background-color: #ccc;
+}
+
+.tattoo__form .button__minimo {
+  padding: 10px 20px;
+  background-color: rgb(211, 211, 211);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tattoo__form .button:hover {
+  background-color: #ccc;
+}
+
+.button__fecha {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.button__fecha:hover {
+  background-color: #ccc;
+}
+
+.totalCost {
+  color: rgb(63, 252, 142);
+  font-weight: 400;
+}
+
+.discountedCost {
+  font-weight: 300;
 }
 
 @media (max-width: 600px) {
