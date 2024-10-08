@@ -1,0 +1,18 @@
+.navbar-brand {
+    img {
+        width: 60px;
+    }
+}
+
+.nav-link {
+    &:hover {
+        color: $color-text-alternative !important;
+        transition: opacity 0.3s ease;
+        opacity: 0.5;
+        background-color: #f3f3f3;
+    }
+}
+
+.nav-item {
+    font-weight: bold;
+}

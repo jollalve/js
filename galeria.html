@@ -18,6 +18,7 @@
 
 <body>
     <div class="wrapper">
+
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.html">
@@ -49,36 +50,37 @@
             </div>
         </nav>
 
-        <main class="container-fluid">
-            <div class="content-section">
-                <h1 class="content-title">CALCULA EL COSTO DE TU TATUAJE</h1>
-
-                <form class="form-edad" id="formEdad">
-                    <label for="fechaNacimiento">Fecha de Nacimiento (DD-MM-AAAA): </label> 
-                    <input type="date" id="fechaNacimiento" required>
-                    <button type="submit" class="button-fecha">Verificar Edad</button>
-                    <div id="mensajeEdad"></div>
-                </form>
-
-                <form class="tattoo-form" id="tattooForm">
-
-                    <div class="tattoo-options">
-                        <label for="categoria">Categoría: <select id="categoria"></select></label><br>
-
-                        <label for="tamano">Tamaño: <select id="tamano"></select></label><br>
-
-                        <label for="color">Color: <select id="color"></select></label><br>
-
-                        <label for="lugar">Lugar: <select id="lugar"></select></label><br>
+        <main class="container-fluid content">
+            <div class="container gallery">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                    <div class="col">
+                        <img src="../images/galeria/IMG1.png" alt="Imagen 1" class="img-fluid">
                     </div>
-                    <button class="button" type="button" onclick="calculateCost()">Calcular Costo</button>
-                </form>
-                    <h3 id="totalSection"> TOTAL: <span class="totalCost" id="totalCost">0</span><br>
-                    <button id="reservarBtn" style="display: none;" class="button-reservar">
-                        Reservar Cita
-                    </button>
+                    <div class="col">
+                        <img src="../images/galeria/IMG2.png" alt="Imagen 2" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG3.png" alt="Imagen 3" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG4.png" alt="Imagen 4" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG5.png" alt="Imagen 5" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG6.png" alt="Imagen 6" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG7.png" alt="Imagen 7" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <img src="../images/galeria/IMG8.png" alt="Imagen 8" class="img-fluid">
+                    </div>
+                </div>
             </div>
         </main>
+        
 
         <footer class="footer bg-light text-dark py-4">
             <div class="container-fluid">
@@ -103,13 +105,10 @@
                 </div>
             </div>
         </footer>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

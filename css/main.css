@@ -9,18 +9,197 @@ body {
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
-  height: 100vh;
-  background-color: black;
+  height: 100%;
+  background-image: url("../images/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
 }
 
-.content__position {
+main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  height: calc(100vh - 100px);
 }
 
-.content__section {
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.indexlogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 30%;
+  margin: auto;
+}
+.indexlogo-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.indexlogo:hover {
+  transition: opacity 0.3s ease;
+  opacity: 0.3;
+}
+
+.gallery img {
+  border-radius: 5px;
+  transition: transform 0.1s ease;
+}
+.gallery img:hover {
+  transform: scale(1.25);
+}
+
+.main-about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 180px);
+  padding: 2rem;
+  text-align: center;
+}
+
+.about-me {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.about-me-profile-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.about-me-content {
+  text-align: left;
+}
+
+.about-me-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.about-me-info {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .about-me {
+    flex-direction: row;
+    text-align: left;
+  }
+  .about-me-profile-pic {
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+  .about-me-content {
+    max-width: 500px;
+  }
+}
+.navbar-brand img {
+  width: 60px;
+}
+
+.nav-link:hover {
+  color: #ffbb00 !important;
+  transition: opacity 0.3s ease;
+  opacity: 0.5;
+  background-color: #f3f3f3;
+}
+
+.nav-item {
+  font-weight: bold;
+}
+
+.main-formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 180px);
+}
+
+.formulario {
+  max-width: 600px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+}
+.formulario-title {
+  text-align: center;
+}
+.formulario-form {
+  margin-top: 20px;
+}
+.formulario-field {
+  margin-bottom: 20px;
+}
+.formulario-label {
+  display: block;
+  margin-bottom: 5px;
+}
+.formulario-input, .formulario-textarea {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.formulario-button {
+  background-color: #000000;
+  color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.formulario-button:hover {
+  background-color: #ccc;
+}
+
+.footer {
+  padding: 20px;
+  width: 100%;
+  margin-top: auto;
+}
+.footer-social-media {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-icon {
+  width: 35px;
+  height: auto;
+}
+.footer-icon:hover {
+  transition: opacity 0.3s ease;
+  opacity: 0.3;
+}
+.footer-copyright {
+  font-size: 16px;
+}
+
+.content-section {
+  border-radius: 5px;
   padding: 2rem;
   max-width: 550px;
   width: 100%;
@@ -28,33 +207,32 @@ body {
   background: white;
 }
 
-.content__title {
+.content-title {
   text-align: center;
 }
 
-.form__edad {
+.form-edad {
   display: grid;
   grid-auto-columns: minmax(100%, 1fr);
   justify-content: center;
   gap: 1rem;
 }
 
-.tattoo__form {
+.tattoo-form {
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: grid;
   grid-template-columns: minmax(100%, 1fr);
   background-color: #f0f0f0;
   color: black;
-
 }
 
-.tattoo__options {
+.tattoo-options {
   display: grid;
   grid-template-columns: minmax(100%, 1fr);
 }
 
-.tattoo__form .button {
+.tattoo-form .button {
   padding: 10px 20px;
   background-color: black;
   color: white;
@@ -62,11 +240,12 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.tattoo__form .button:hover {
+
+.tattoo-form .button:hover {
   background-color: #ccc;
 }
 
-.tattoo__form .button__minimo {
+.tattoo-form .button-minimo {
   padding: 10px 20px;
   background-color: rgb(211, 211, 211);
   color: white;
@@ -74,11 +253,12 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.tattoo__form .button:hover {
+
+.tattoo-form .button:hover {
   background-color: #ccc;
 }
 
-.button__fecha {
+.button-fecha {
   background-color: black;
   color: white;
   border: none;
@@ -87,8 +267,28 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.button__fecha:hover {
+
+.button-fecha:hover {
   background-color: #ccc;
+}
+
+.button-reservar {
+  background-color: black;
+  color: white;
+  border: none;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-reservar:hover {
+  background-color: #ccc;
+}
+
+#confirmarReservaBtn {
+  background-color: black;
 }
 
 .totalCost {
@@ -96,15 +296,11 @@ body {
   font-weight: 400;
 }
 
-.discountedCost {
-  font-weight: 300;
-}
-
 @media (max-width: 600px) {
-  .content__section {
+  .content-section {
     padding: 1rem;
   }
-  .tattoo__form {
+  .tattoo-form {
     padding: 10px;
   }
 }

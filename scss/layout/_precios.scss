@@ -1,0 +1,105 @@
+.content-section {
+  border-radius: 5px;
+  padding: 2rem;
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.content-title {
+  text-align: center;
+}
+
+.form-edad {
+  display: grid;
+  grid-auto-columns: minmax(100%, 1fr);
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tattoo-form {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: minmax(100%, 1fr);
+  background-color: #f0f0f0;
+  color: black;
+
+}
+
+.tattoo-options {
+  display: grid;
+  grid-template-columns: minmax(100%, 1fr);
+}
+
+.tattoo-form .button {
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tattoo-form .button:hover {
+  background-color: #ccc;
+}
+
+.tattoo-form .button-minimo {
+  padding: 10px 20px;
+  background-color: rgb(211, 211, 211);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tattoo-form .button:hover {
+  background-color: #ccc;
+}
+
+.button-fecha {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-fecha:hover {
+  background-color: #ccc;
+}
+
+.button-reservar {
+  background-color: black;
+  color: white;
+  border: none;
+  margin-top: 1rem ;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-reservar:hover {
+  background-color: #ccc;
+}
+
+#confirmarReservaBtn {
+  background-color: black;
+}
+
+.totalCost {
+  color: rgb(63, 252, 142);
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .content-section {
+    padding: 1rem;
+  }
+  .tattoo-form {
+    padding: 10px;
+  }
+}

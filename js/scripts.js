@@ -132,12 +132,30 @@ function verificarMayorDeEdad() {
         tattooForm.style.display = 'block';
         totalSection.style.display = 'block';
         guardarFechaNacimiento(fechaNacimiento);
+
+        Swal.fire({
+            title: '¡Bienvenido!',
+            text: 'Puedes ahora calcular el precio te tu tatuaje',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: 'black'
+          })
+
         return true;
     } else {
         mensajeEdad.textContent = '* Debe ser mayor de 18 años para hacerte un tatuaje.';
         mensajeEdad.style.color = 'red';
         tattooForm.style.display = 'none';
         totalSection.style.display = 'none';
+
+        Swal.fire({
+            title: 'Lo sentimos.',
+            text: 'Debes ser mayor de Edad para ingresar',
+            icon: 'error',
+            confirmButtonText: 'Cerrar',
+            confirmButtonColor: 'black'
+          })
+          
         return false;
     }
 }
@@ -182,16 +200,198 @@ function calculateCost() {
     }
 
     const totalCost = configuracion.calcularCostoTotal();
-    const discountedCost = totalCost * 0.85;
-
     document.getElementById('totalCost').textContent = `$${totalCost}`;
-    if (selectedSize.cost === smallSizeCost) {
-        document.getElementById('discountedCost').textContent = "DESCUENTO SOLO VÁLIDO PARA TATUAJES MAYORES A 8 CM";
-        document.getElementById('discountedCost').style.color = 'red';
+
+    const reservarBtn = document.getElementById('reservarBtn');
+    reservarBtn.style.display = 'block';
+    reservarBtn.addEventListener('click', mostrarModalReserva);
+}
+
+function mostrarModalReserva() {
+    Swal.fire({
+        title: 'Reserva tu cita',
+        html: `
+            <form id="formReserva">
+                <label for="nombreCliente">Nombre: </label>
+                <input type="text" id="nombreCliente" required style="width: 100%; margin-bottom: 10px;">
+                
+                <label for="fechaReserva">Selecciona una fecha: </label>
+                <input type="date" id="fechaReserva" required style="width: 100%; margin-bottom: 10px;">
+                
+                <label for="horaReserva">Selecciona una hora: </label>
+                <select id="horaReserva" required style="width: 100%; margin-bottom: 10px;">
+                    <option value="">Selecciona una hora</option>
+                </select>
+
+                <button type="button" id="confirmarReservaBtn" class="swal2-confirm swal2-styled">
+                    Agendar Cita
+                </button>
+            </form>
+        `,
+        showConfirmButton: false,
+        width: '400px',
+    });
+
+    cargarDisponibilidad();
+
+    document.getElementById('confirmarReservaBtn').addEventListener('click', function() {
+        agendarCita();
+    });
+}
+
+function cargarDisponibilidad() {
+    fetch('disponibilidad.json')
+        .then(response => response.json())
+        .then(data => {
+            const horarios = data.horarios;
+            const excepciones = data.excepciones;
+
+            const fechaInput = document.getElementById('fechaReserva');
+            fechaInput.addEventListener('change', function() {
+                const fechaSeleccionada = fechaInput.value;
+                const diaSemana = new Date(fechaSeleccionada).toLocaleString('es-ES', { weekday: 'long' }).toLowerCase();
+                
+                let horariosDisponibles = excepciones[fechaSeleccionada] || horarios[diaSemana] || [];
+                
+                actualizarHorasDisponibles(horariosDisponibles);
+            });
+        })
+        .catch(error => console.error('Error al cargar la disponibilidad:', error));
+}
+
+function actualizarHorasDisponibles(horas) {
+    const horaInput = document.getElementById('horaReserva');
+    horaInput.innerHTML = '';
+    
+    if (horas.length === 0) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'No hay horarios disponibles';
+        horaInput.appendChild(option);
     } else {
-        document.getElementById('discountedCost').textContent = `$${discountedCost}`;
+        horas.forEach(hora => {
+            const option = document.createElement('option');
+            option.value = hora;
+            option.textContent = hora;
+            horaInput.appendChild(option);
+        });
     }
 }
+
+function agendarCita() {
+    const nombreCliente = document.getElementById('nombreCliente').value.trim();
+    const fechaReserva = document.getElementById('fechaReserva').value;
+    const horaReserva = document.getElementById('horaReserva').value;
+
+    if (!nombreCliente || !fechaReserva || !horaReserva) {
+        Swal.fire('Error', 'Por favor, completa todos los campos para agendar la cita.', 'error');
+        return;
+    }
+
+    const categoria = document.getElementById('categoria').selectedOptions[0].textContent;
+    const tamano = document.getElementById('tamano').selectedOptions[0].textContent;
+    const color = document.getElementById('color').selectedOptions[0].textContent;
+    const ubicacion = document.getElementById('lugar').selectedOptions[0].textContent;
+    const totalCost = document.getElementById('totalCost').textContent;
+
+    const detallesReserva = `
+        Nombre del Cliente: ${nombreCliente}<br>
+        Fecha de la Cita: ${fechaReserva}<br>
+        Hora de la Cita: ${horaReserva}<br>
+        <hr>
+        Categoría del Tatuaje: ${categoria}<br>
+        Tamaño del Tatuaje: ${tamano}<br>
+        Colores: ${color}<br>
+        Ubicación: ${ubicacion}<br>
+        <hr>
+        Total a Pagar: ${totalCost}
+    `;
+
+    Swal.fire({
+        title: 'Detalles de la Cita',
+        html: detallesReserva,
+        icon: 'info',
+        confirmButtonText: 'Aceptar',
+        showCancelButton: true,
+        cancelButtonText: 'Descargar PDF',
+        confirmButtonColor: 'green',
+        cancelButtonColor: 'blue',
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+            generarPDF(nombreCliente, fechaReserva, horaReserva, categoria, tamano, color, ubicacion, totalCost);
+        }
+    });
+}
+
+function agendarCita() {
+    const nombreCliente = document.getElementById('nombreCliente').value.trim();
+    const fechaReserva = document.getElementById('fechaReserva').value;
+    const horaReserva = document.getElementById('horaReserva').value;
+
+    if (!nombreCliente || !fechaReserva || !horaReserva) {
+        Swal.fire('Error', 'Por favor, completa todos los campos para agendar la cita.', 'error');
+        return;
+    }
+
+    const categoria = document.getElementById('categoria').selectedOptions[0].textContent;
+    const tamano = document.getElementById('tamano').selectedOptions[0].textContent;
+    const color = document.getElementById('color').selectedOptions[0].textContent;
+    const ubicacion = document.getElementById('lugar').selectedOptions[0].textContent;
+    const totalCost = document.getElementById('totalCost').textContent;
+
+    const detallesReserva = `
+        Nombre del Cliente: ${nombreCliente}<br>
+        Fecha de la Cita: ${fechaReserva}<br>
+        Hora de la Cita: ${horaReserva}<br>
+        <hr>
+        Categoría del Tatuaje: ${categoria}<br>
+        Tamaño del Tatuaje: ${tamano}<br>
+        Colores: ${color}<br>
+        Ubicación: ${ubicacion}<br>
+        <hr>
+        Total a Pagar: ${totalCost}
+    `;
+
+    Swal.fire({
+        title: 'Reserva Confirmada',
+        html: detallesReserva,
+        icon: 'success',
+        confirmButtonText: 'Descargar PDF',
+        showCancelButton: true,
+        cancelButtonText: 'Cerrar',
+        confirmButtonColor: 'blue',
+        cancelButtonColor: 'grey',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            generarPDF(nombreCliente, fechaReserva, horaReserva, categoria, tamano, color, ubicacion, totalCost);
+        }
+    });
+}
+
+function generarPDF(nombreCliente, fechaReserva, horaReserva, categoria, tamano, color, ubicacion, totalCost) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Detalles de la Cita - JP Tattoo', 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Nombre del Cliente: ${nombreCliente}`, 20, 40);
+    doc.text(`Fecha de la Cita: ${fechaReserva}`, 20, 50);
+    doc.text(`Hora de la Cita: ${horaReserva}`, 20, 60);
+
+    doc.text('Detalles del Tatuaje:', 20, 80);
+    doc.text(`Categoría: ${categoria}`, 20, 90);
+    doc.text(`Tamaño: ${tamano}`, 20, 100);
+    doc.text(`Colores: ${color}`, 20, 110);
+    doc.text(`Ubicación: ${ubicacion}`, 20, 120);
+
+    doc.setFontSize(14);
+    doc.text(`Total a Pagar: ${totalCost}`, 20, 140);
+
+    doc.save(`Cita_Tatuaje_${nombreCliente}.pdf`);
+}
+
 
 window.onload = function() {
     const tattooForm = document.getElementById('tattooForm');
@@ -199,3 +399,5 @@ window.onload = function() {
     document.getElementById('totalSection').style.display = 'none';
     cargarFechaNacimiento();
 };
+
+
