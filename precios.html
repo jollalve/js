@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.html">
-                    <img src="../images/logo100px.png" alt="JP Tattoo Logo">
+                    <img src="../images/logo100px.png" alt="JP Tattoo Logo" href="../js/index.html">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
                     <button class="button" type="button" onclick="calculateCost()">Calcular Costo</button>
                 </form>
                     <h3 id="totalSection"> TOTAL: <span class="totalCost" id="totalCost">0</span><br>
-                    <button id="reservarBtn" style="display: none;" class="button-reservar">
+                    <button id="reservarBtn" onclick="mostrarModalReserva()" style="display: none;" class="button-reservar">
                         Reservar Cita
                     </button>
             </div>
