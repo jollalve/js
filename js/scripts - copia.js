@@ -171,31 +171,20 @@ function calculateCost() {
 }
 
 function mostrarModalReserva() {
-    const savedLanguage = localStorage.getItem("idioma") || "es";
-    fetch(`./languages/${savedLanguage}.json`)
-    .then((res) => res.json())
-    .then(data => {
-        const modalTitle = data.modal["modal-titulo"];
-        const nameLabel = data.modal["label-nombre"];
-        const dateLabel = data.modal["label-fecha"];
-        const timeLabel = data.modal["label-hora"];
-        const placeholderTime = data.modal["placeholder-hora"];
-        const buttonText = data.modal["boton-agendar"];
-
     Swal.fire({
-        title: `<h1>${modalTitle}</h1>`,
+        title: `<h1 data-section="modal" data-value="modal-titulo">Reserva tu Cita</h1>`,
         html: `
                 <form id="formReserva">
-                <label for="nombreCliente">${nameLabel}</label>
+                <label for="nombreCliente">Nombre: </label>
                 <input type="text" id="nombreCliente" required style="width: 100%; margin-bottom: 10px;">
-                <label for="fechaReserva">${dateLabel}</label>
+                <label for="fechaReserva">Selecciona una fecha: </label>
                 <input type="date" id="fechaReserva" required style="width: 100%; margin-bottom: 10px;">
-                <label for="horaReserva">${timeLabel}</label>
+                <label for="horaReserva">Selecciona una hora: </label>
                 <select id="horaReserva" required style="width: 100%; margin-bottom: 10px;">
-                    <option value="">${placeholderTime}</option>
+                    <option value="">Selecciona una hora</option>
                 </select>
                 <button type="button" id="confirmarReservaBtn" class="swal2-confirm swal2-styled">
-                    ${buttonText}
+                    Agendar Cita
                 </button>
             </form>
         `,
@@ -203,13 +192,9 @@ function mostrarModalReserva() {
         width: '400px',
     });
     cargarDisponibilidad();
-            document.getElementById("confirmarReservaBtn").addEventListener("click", function () {
-                agendarCita();
-            });
-        })
-        .catch((error) => {
-            console.error("Error al cargar JSON:", error);
-        });
+    document.getElementById('confirmarReservaBtn').addEventListener('click', function() {
+        agendarCita();
+    });
 }
 
 function cargarDisponibilidad() {

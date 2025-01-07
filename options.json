@@ -1,0 +1,31 @@
+{
+    "categories": [
+        { "name": "Blackwork", "cost": 40000 },
+        { "name": "Minimalista", "cost": 40000 },
+        { "name": "Acuarelas", "cost": 50000 },
+        { "name": "Tradicional", "cost": 40000 },
+        { "name": "Geométrico", "cost": 40000 },
+        { "name": "Nombre Sencillo", "cost": 30000 }
+    ],
+    "sizes": [
+        { "name": "1 - 8 cm", "cost": 0 },
+        { "name": "8 - 16 cm", "cost": 25000 },
+        { "name": "16 - 24 cm", "cost": 40000 }
+    ],
+    "colors": [
+        { "name": "1 Color", "cost": 0 },
+        { "name": "2 Colores", "cost": 10000 },
+        { "name": "3 Colores", "cost": 15000 },
+        { "name": "4 Colores", "cost": 20000 }
+    ],
+    "locations": [
+        { "name": "Brazo", "cost": 0 },
+        { "name": "Mano", "cost": 10000 },
+        { "name": "Cuello", "cost": 10000 },
+        { "name": "Abdomen", "cost": 25000 },
+        { "name": "Pierna", "cost": 0 },
+        { "name": "Espalda", "cost": 0 },
+        { "name": "Pecho", "cost": 5000 },
+        { "name": "Costilla", "cost": 5000 }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "header": {
+        "inicio": "HOME",
+        "galeria": "GALLERY",
+        "precios": "PRICES",
+        "sobre-mi": "ABOUT ME",
+        "contacto": "CONTACT ME"
+    },
+
+    "about-me": {
+        "about-name": "Juan Pablo Ollalve",
+        "about-info": "I am Juan Pablo Ollalve, born on April 9, 1993, in Maracaibo, Venezuela. I have always been drawn to art, which led me to study Graphic Design. In 2015, I discovered my true passion in the world of tattooing, where each design becomes a unique form of expression. I specialize in blackwork, linework, and black and grey styles, which allow me to play with the precision of lines and the depth of contrasts. For me, each tattoo is an opportunity to tell a story and connect with people through art."
+    },
+
+    "calculador-costos": {
+        "titulo-calculador": "CALCULATE THE COST OF YOUR TATTOO",
+        "fecha-nacimiento": "Date of Birth (DD-MM-YYYY): ",
+        "boton-verificar": "Verify Age",
+        "label-categoria": "Category: ",
+        "label-tamano": "Size: ",
+        "label-color": "Color: ",
+        "label-lugar": "Location: ",
+        "boton-calcular": "Calculate Cost",
+        "boton-reservar": "Book Appointment"
+    },
+
+    "modal": {
+        "modal-titulo": "Book Your Appointment",
+        "label-nombre": "Name:",
+        "label-fecha": "Select a date:",
+        "label-hora": "Select a time:",
+        "placeholder-hora": "Select a time",
+        "boton-agendar": "Book Appointment"
+    },
+
+    "form-contacto": {
+        "form-titulo": "Contact Me",
+        "form-nombre": "NAME",
+        "form-apellido": "LAST NAME",
+        "form-correo": "EMAIL",
+        "form-mensaje": "MESSAGE",
+        "form-botonEnviar": "Send"
+    },
+
+    "footer": {
+        "footer-copyright": "&copy; 2024 JP TATTOO. All rights reserved."
+    }
+}
+

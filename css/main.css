@@ -131,6 +131,26 @@ main {
   font-weight: bold;
 }
 
+.languages {
+  display: flex;
+  gap: .5rem;
+  background-color: #ffbb00;
+  max-height: 30px;
+  padding: 0 10px;
+  margin-left: 1rem;
+}
+
+.lang-button {
+  padding: 2px;
+  max-height: auto;
+  background-color: transparent;
+  border: none;
+}
+
+.lang-button:hover {
+  background-color: white;
+}
+
 .main-formulario {
   display: flex;
   justify-content: center;
@@ -140,6 +160,7 @@ main {
 
 .formulario {
   max-width: 600px;
+  min-width: 350px;
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 5px;
@@ -225,11 +246,15 @@ main {
   grid-template-columns: minmax(100%, 1fr);
   background-color: #f0f0f0;
   color: black;
+  padding: 1rem;
 }
 
 .tattoo-options {
   display: grid;
-  grid-template-columns: minmax(100%, 1fr);
+  grid-template-columns: 30% 70%;
+  gap: 1rem;
+  margin: 0rem 1rem 0rem 0rem;
+  padding-bottom: 1rem;
 }
 
 .tattoo-form .button {
