@@ -50,14 +50,6 @@ main {
   opacity: 0.3;
 }
 
-.gallery img {
-  border-radius: 5px;
-  transition: transform 0.1s ease;
-}
-.gallery img:hover {
-  transform: scale(1.25);
-}
-
 .main-about {
   display: flex;
   justify-content: center;
